@@ -58,30 +58,23 @@ if st.button("Predict Fraud"):
         "V4": v4
     }
 
-    response = requests.post(API_URL, data=payload)
-    print("status:", response.status_code)
-    print("content;",response.text)
+    response = requests.post(API_URL, json=payload)
+    
+    result = response.json()
 
-    if response.status_code== 200:
-        try:
-            prediction=response.json()
-
-            if prediction[0] == 1:
-                st.error("Fraud Transaction")
-            else:
-                st.success("Authentic Transaction")
-        except Exception as e:
-            st.error(f"Error parsing response: {e}")
-            prediction = None
-
-    result = None
-    try:
-        result = response.json()
-    except Exception:
-        result = {}
+# Success case
+if response.status_code == 200:
 
     if "prediction" in result:
-        st.success(result["prediction"])
+        st.success(f"Prediction: {result['prediction']}")
+
+    
+    elif "fraud" in result:
+        st.success(f"Fraud Status: {result['fraud']}")
 
     else:
-        st.error(result.get("error", "Unknown error occurred"))
+        st.write(result)
+
+# Error case
+else:
+    st.error(result.get("error", result.get("detail", "Something went wrong")))

@@ -35,47 +35,47 @@ if st.button("Predict"):
         st.success("Authentic Transaction")
 
 
-"""
-st.title("Fintech Fraud Detection System")
 
-st.subheader("Enter Transaction Details")
+#st.title("Fintech Fraud Detection System")
 
-time = st.number_input("Time")
-amount = st.number_input("Amount")
-v1 = st.number_input("V1")
-v2 = st.number_input("V2")
-v3 = st.number_input("V3")
-v4 = st.number_input("V4")
+#st.subheader("Enter Transaction Details")
 
-if st.button("Predict Fraud"):
+#time = st.number_input("Time")
+#amount = st.number_input("Amount")
+#v1 = st.number_input("V1")
+#v2 = st.number_input("V2")
+#v3 = st.number_input("V3")
+#v4 = st.number_input("V4")
 
-    payload = {
-        "Time": time,
-        "Amount": amount,
-        "V1": v1,
-        "V2": v2,
-        "V3": v3,
-        "V4": v4
-    }
+#if st.button("Predict Fraud"):
 
-    response = requests.post(API_URL, json=payload)
+    #payload = {
+        #"Time": time,
+        #"Amount": amount,
+        #"V1": v1,
+        #"V2": v2,
+        #"V3": v3,
+        #"V4": v4
+    #}
+   
+    #response = requests.post(API_URL, json=payload)
 
-    result = response.json()
+    #result = response.json()
 
 # Success case
-if response.status_code == 200:
+#if response.status_code == 200:
 
-    if "prediction" in result:
-        st.success(f"Prediction: {result['prediction']}")
+    #if "prediction" in result:
+        #st.success(f"Prediction: {result['prediction']}")
 
     
-    elif "fraud" in result:
-        st.success(f"Fraud Status: {result['fraud']}")
+    #elif "fraud" in result:
+        #st.success(f"Fraud Status: {result['fraud']}")
 
-    else:
-        st.write(result)
+    #else:
+        #st.write(result)
 
 # Error case
-else:
-    st.error(result.get("error", result.get("detail", "Something went wrong")))
-"""
+#else:
+    #st.error(result.get("error", result.get("detail", "Something went wrong")))
+

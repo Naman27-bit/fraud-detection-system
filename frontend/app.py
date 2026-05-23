@@ -84,4 +84,4 @@ if st.button("Predict Fraud"):
         st.success(result["prediction"])
 
     else:
-        st.error(result["error"])
+        st.error(result.get("error", "Unknown error occurred"))

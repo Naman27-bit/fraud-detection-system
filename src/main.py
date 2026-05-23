@@ -115,3 +115,155 @@ joblib.dump(model, "models/fraud_model.pkl")
 joblib.dump(scaler, "models/scaler.pkl")
 
 print("Model Saved")
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+# -------------------------------
+# Page Configuration
+# -------------------------------
+st.set_page_config(
+    page_title="Fraud Detection System",
+    page_icon="💳",
+    layout="wide"
+)
+
+# -------------------------------
+# Title
+# -------------------------------
+st.title("💳 Fraud Detection System")
+st.markdown("### Detect Fraudulent Transactions using Machine Learning")
+
+# -------------------------------
+# Create Random Dataset
+# -------------------------------
+st.header("📌 Random Data Creation")
+
+np.random.seed(42)
+
+data = pd.DataFrame({
+    "Transaction_Amount": np.random.randint(100, 10000, 500),
+    "Transaction_Time": np.random.randint(0, 24, 500),
+    "Account_Age": np.random.randint(1, 10, 500),
+    "Fraud": np.random.randint(0, 2, 500)
+})
+
+st.success("0 = Authentic Transaction | 1 = Fraud Transaction")
+
+# -------------------------------
+# Display Data
+# -------------------------------
+st.header("📊 Display of Top 5 Records")
+st.dataframe(data.head())
+
+# -------------------------------
+# Features and Target
+# -------------------------------
+x = data.drop("Fraud", axis=1)
+y = data["Fraud"]
+
+st.header("📌 Training Variables and Target Variable")
+
+st.write("### Training Variables (X)")
+st.write(x.head())
+
+st.write("### Target Variable (Y)")
+st.write(y.head())
+
+# -------------------------------
+# Train Test Split
+# -------------------------------
+st.header("✂️ Train-Test Split")
+
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=42
+)
+
+st.write(f"Training Data Shape: {x_train.shape}")
+st.write(f"Testing Data Shape: {x_test.shape}")
+
+# -------------------------------
+# Train Model
+# -------------------------------
+st.header("🤖 Train a Simple Model")
+
+model = LogisticRegression()
+model.fit(x_train, y_train)
+
+st.success("Model Trained Successfully!")
+
+# -------------------------------
+# Model Evaluation
+# -------------------------------
+st.header("📈 Model Evaluation")
+
+y_pred = model.predict(x_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+
+st.metric(label="Model Accuracy", value=f"{accuracy*100:.2f}%")
+
+# -------------------------------
+# Visualization
+# -------------------------------
+st.header("📉 Fraud vs Authentic Transactions")
+
+fig, ax = plt.subplots()
+
+data["Fraud"].value_counts().plot(
+    kind="bar",
+    ax=ax
+)
+
+ax.set_xticklabels(["Authentic", "Fraud"], rotation=0)
+ax.set_ylabel("Count")
+
+st.pyplot(fig)
+
+# -------------------------------
+# Real Time Simulation
+# -------------------------------
+st.header("🔍 Real Time Simulation")
+
+amount = st.number_input(
+    "Enter Transaction Amount",
+    min_value=100,
+    max_value=10000,
+    value=500
+)
+
+time = st.slider(
+    "Transaction Time",
+    0,
+    23,
+    12
+)
+
+account_age = st.slider(
+    "Account Age (Years)",
+    1,
+    10,
+    2
+)
+
+if st.button("Predict Transaction"):
+
+    input_data = np.array([[amount, time, account_age]])
+
+    prediction = model.predict(input_data)
+
+    if prediction[0] == 1:
+        st.error("⚠️ Fraud Transaction Detected")
+    else:
+        st.success("✅ Authentic Transaction")
+
+# -------------------------------
+# Footer
+# -------------------------------
+st.markdown("---")
+st.markdown("Developed with ❤️ using Streamlit")

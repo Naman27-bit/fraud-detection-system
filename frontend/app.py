@@ -35,7 +35,7 @@ if st.button("Predict"):
         st.success("Authentic Transaction")
 
 
-
+"""
 st.title("Fintech Fraud Detection System")
 
 st.subheader("Enter Transaction Details")
@@ -59,7 +59,7 @@ if st.button("Predict Fraud"):
     }
 
     response = requests.post(API_URL, json=payload)
-    
+
     result = response.json()
 
 # Success case
@@ -78,3 +78,4 @@ if response.status_code == 200:
 # Error case
 else:
     st.error(result.get("error", result.get("detail", "Something went wrong")))
+"""

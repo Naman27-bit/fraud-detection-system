@@ -30,7 +30,12 @@ if st.button("Predict"):
     if prediction[0] == 1:
         st.error("Fraud Transaction")
     else:
+ 
+ 
         st.success("Authentic Transaction")
+
+
+
 st.title("FinTech Fraud Detection System")
 
 st.subheader("Enter Transaction Details")

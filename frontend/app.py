@@ -36,7 +36,7 @@ if st.button("Predict"):
 
 
 
-st.title("FinTech Fraud Detection System")
+st.title("Fintech Fraud Detection System")
 
 st.subheader("Enter Transaction Details")
 

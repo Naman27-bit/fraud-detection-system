@@ -1,8 +1,36 @@
 import streamlit as st
+import numpy as np
+from sklearn.linear_model import LogisticRegression
 import requests
 
-API_URL = "http://127.0.0.1:8000/predict"
+API_URL = "http://localhost:8000/predict"
 
+# Dummy training
+X = np.array([
+    [100, 1],
+    [5000, 0],
+    [200, 1],
+    [9000, 0]
+])
+
+y = np.array([0, 1, 0, 1])
+
+model = LogisticRegression()
+model.fit(X, y)
+
+st.title("Fraud Detection System")
+
+amount = st.number_input("Transaction Amount")
+location = st.selectbox("International Transaction?", [0, 1])
+
+if st.button("Predict"):
+
+    prediction = model.predict([[amount, location]])
+
+    if prediction[0] == 1:
+        st.error("Fraud Transaction")
+    else:
+        st.success("Authentic Transaction")
 st.title("FinTech Fraud Detection System")
 
 st.subheader("Enter Transaction Details")

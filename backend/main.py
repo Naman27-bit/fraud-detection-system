@@ -6,6 +6,7 @@ def home():
     return {"message": "Backend Running"}
 
 @app.post("/predict")
+
 def predict(data: dict):
     return {
         "prediction": "Fraud",

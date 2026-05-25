@@ -32,12 +32,13 @@ if submitted:
         res.raise_for_status()
         data = res.json()
         prediction = data.get("prediction", "Unknown")
+        label = data.get("prediction_label")
 
         st.success(f"Prediction: **{prediction}**")
+        if label is not None:
+        except requests.exceptions.RequestException as e:
         st.write("Model response:")
         st.json(data)
-
-    except requests.exceptions.RequestException as e:
         st.error("Request to backend failed.")
         st.write(f"API_URL: {API_URL}")
         st.exception(e)

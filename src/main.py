@@ -13,7 +13,6 @@ Import all the required libraries
 
 import numpy as np
 import pandas as pd
-import os 
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -78,10 +77,10 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 
-scaler=StandardScaler()
+scaler = StandardScaler()
 
-x_train_scaled=scaler.fit_transform(X_train)
-x_test_scaled=scaler.fit_transform(X_test)
+x_train_scaled = scaler.fit_transform(X_train)
+x_test_scaled = scaler.fit_transform(X_test)
 
 
 """Model Evaluation"""

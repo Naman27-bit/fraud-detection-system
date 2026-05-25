@@ -1,7 +1,7 @@
 import requests
 import streamlit as st
 
-API_URL = st.secrets.get("API_URL", "http://backend:8000/predict")
+API_URL = st.secrets.get("API_URL", "http://localhost:8000/predict")
 
 st.set_page_config(page_title="Fraud Detection", layout="centered")
 st.title("💳 Fintech Fraud Detection")

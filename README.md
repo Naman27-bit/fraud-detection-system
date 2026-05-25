@@ -1,4 +1,4 @@
-# Fintech Fraud Detection (FastAPI + Streamlit)
+# Fraud Detection (FastAPI + Streamlit)
 
 This project provides a simple end-to-end fintech fraud detection application:
 
